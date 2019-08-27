@@ -22,7 +22,8 @@ good_boy = [true, false]
     Dog.create(
       name: Faker::Creature::Dog.name,
       breed: Faker::Creature::Dog.breed,
-      user: user
+      user: user,
+      image_url: 'https://source.unsplash.com/400x400/?dog'
     )
   end
 
