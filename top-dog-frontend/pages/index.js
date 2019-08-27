@@ -1,39 +1,47 @@
 import React from 'react';
-import Link from 'next/link';
 import Head from 'next/head';
-import Nav from '../components/nav';
+import withData from '../lib/apollo';
+import styled from 'styled-components';
 
-const Home = () => (
-  <div>
-    <Head>
-      <title>Home</title>
-    </Head>
+import Layout from '../components/Layout';
+import DogList from '../components/DogList';
 
-    <Nav />
+const HomePageWrapper = styled.div`
+  width: 100%;
+  color: #333;
+  width: 80vw;
+  margin: 0 auto;
 
-    <div className="hero">
-      <h1 className="title">Welcome to Top Dog</h1>
-      <p className="description">Is your dog the next top dog? 🐶</p>
-    </div>
+  h1 {
+    margin: 0;
+    width: 100%;
+    line-height: 1.15;
+    font-size: 48px;
+  }
 
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-    `}</style>
-  </div>
-);
+  h1,
+  p {
+    text-align: center;
+  }
 
-export default Home;
+  .title-wrapper {
+    margin-bottom: 20px;
+  }
+`;
+
+export default withData(() => {
+  return (
+    <Layout>
+      <Head>
+        <title>Dogs</title>
+      </Head>
+      <HomePageWrapper>
+        <div className="title-wrapper">
+          <h1 className="title">Welcome to Top Dog</h1>
+          <p className="description">Is your dog the next top dog? 🐶</p>
+        </div>
+        <DogList />
+      </HomePageWrapper>
+    </Layout>
+  );
+});
