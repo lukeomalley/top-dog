@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class QueryType < Types::BaseObject
     # Add root-level fields here.
@@ -8,7 +10,7 @@ module Types
       User.all
     end
 
-    field :user, Types::UserType, null: false do 
+    field :user, Types::UserType, null: false do
       argument :id, ID, required: true
     end
     def user(id:)

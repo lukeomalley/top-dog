@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Dog < ApplicationRecord
   has_many :ratings, dependent: :destroy
   belongs_to :user
@@ -7,6 +9,6 @@ class Dog < ApplicationRecord
   end
 
   def say_hello
-    print "hello"
+    print 'hello'
   end
 end
