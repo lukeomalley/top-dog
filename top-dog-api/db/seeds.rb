@@ -14,7 +14,7 @@ Rating.destroy_all
 
 good_boy = [true, false]
 
-10.times do
+50.times do
   user = User.create(
     name: Faker::Name.first_name,
     email: Faker::Internet.email

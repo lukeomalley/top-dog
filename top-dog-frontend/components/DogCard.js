@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const DogCardWrapper = styled.div`
   display: grid;
@@ -26,14 +27,21 @@ const DogCardWrapper = styled.div`
 
 const DogCard = ({ dog }) => {
   return (
-    <DogCardWrapper>
-      <img src={dog.imageUrl} />
-      <div className="details">
-        <h2>{dog.name}</h2>
-        <p>Breed: {dog.breed}</p>
-        <p>{dog.isGoodDog ? 'Good Dog' : 'Bad Dog'}</p>
-      </div>
-    </DogCardWrapper>
+    <Link
+      href={{
+        pathname: '/dog',
+        query: { id: dog.id },
+      }}
+    >
+      <DogCardWrapper>
+        <img src={dog.imageUrl} />
+        <div className="details">
+          <h2>{dog.name}</h2>
+          <p>Breed: {dog.breed}</p>
+          <p>{dog.isGoodDog ? 'Good Dog' : 'Bad Dog'}</p>
+        </div>
+      </DogCardWrapper>
+    </Link>
   );
 };
 

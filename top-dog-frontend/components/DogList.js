@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
 import styled from 'styled-components';
 
 import DogCard from './DogCard';
@@ -25,34 +23,28 @@ const DogListWrapper = styled.div`
   }
 `;
 
-const ALL_DOGS_QUERY = gql`
-  {
-    dogs {
-      id
-      name
-      breed
-      imageUrl
-      isGoodDog
-    }
-  }
-`;
+const DogList = ({ dogs }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-const DogList = () => {
-  const { loading, error, data } = useQuery(ALL_DOGS_QUERY);
-  if (data && data.dogs) {
-    const { dogs } = data;
-    return (
-      <DogListWrapper>
-        <input type="text" placeholder="Search for Dogs" />
-        <div class="dog-list">
-          {dogs.map(dog => {
-            return <DogCard key={dog.id} dog={dog}></DogCard>;
-          })}
-        </div>
-      </DogListWrapper>
-    );
-  }
-  return <div>Loading...</div>;
+  const filterDogs = dogs => {
+    return dogs.filter(dog => dog.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  };
+
+  return (
+    <DogListWrapper>
+      <input
+        type="text"
+        placeholder="Search for Dogs"
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
+      />
+      <div className="dog-list">
+        {filterDogs(dogs).map(dog => {
+          return <DogCard key={dog.id} dog={dog}></DogCard>;
+        })}
+      </div>
+    </DogListWrapper>
+  );
 };
 
 export default DogList;
